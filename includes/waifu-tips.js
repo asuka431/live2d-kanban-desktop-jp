@@ -520,7 +520,7 @@ function loadTipsMessage(result) {
     window.addEventListener('keydown', function (e) {
         if (e.altKey && e.keyCode === 88) { //Alt+X:关闭
             cover(brightness = 0);
-            showMessage('感觉一切都亮起来了呢！', 3000, true);
+            showMessage('すべてが明るくなった気がするね！', 3000, true);
         }
         if (e.altKey && e.keyCode === 38) { //Alt+↑:增加亮度
             if (brightness - 0.05 > 0.05) cover(brightness -= 0.05);
@@ -539,7 +539,7 @@ function loadTipsMessage(result) {
     $('.waifu-tool .fui-Set').click(function() {ipcRenderer.send('Settings','Open');}); // 设置调起
 
     /*夜间模式*/
-    $('.waifu-tool .fui-moon').click(function () { cover(0.3); showMessage('夜间模式开启成功!按alt+↑可提高亮度,按alt+↓可降低亮度,按alt+x可取消夜间模式', 5000, true) });
+    $('.waifu-tool .fui-moon').click(function () { cover(0.3); showMessage('ナイトモードを有効にしました！Alt+↑で明るさを上げ、Alt+↓で下げ、Alt+Xで解除できます', 5000, true) });
 	
     /*日程提醒模块点击*/
 	if(live2d_settings.eyeProtInfo){
@@ -550,11 +550,11 @@ function loadTipsMessage(result) {
         let scheduleDateStr = sessionStorage.getItem('ScheduleDate');
 		document.getElementById('NLPInfinite').style.display = 'block';
         $('#timeset').focus();
-		if(scheduleTime != null && scheduleName != null && scheduleTime > 0)
-		{
+        if(scheduleTime != null && scheduleName != null && scheduleTime > 0)
+        {
             let date_temp = new Date();
             let scheduleDate = new Date(scheduleDateStr);
-            document.getElementById('TimeDisplay').innerHTML = "距日程提醒剩余 "+((parseInt(scheduleTime)-date_temp.getTime()+scheduleDate.getTime())/60000).toFixed(1)+" 分钟";
+            document.getElementById('TimeDisplay').innerHTML = "予定まで残り "+((parseInt(scheduleTime)-date_temp.getTime()+scheduleDate.getTime())/60000).toFixed(1)+" 分";
             document.getElementById('contextset').value=scheduleName;
             isTimeSet = true;
             setTime = scheduleTime;
@@ -562,23 +562,23 @@ function loadTipsMessage(result) {
         }
 		// if(isTimeSet === true && setTime != "" && setTime > 0)
         // {let date_temp = new Date();document.getElementById('TimeDisplay').innerHTML = "距日程提醒剩余 "+((setTime-date_temp.getTime()+date.getTime())/60000).toFixed(1)+" 分钟";}    
-		else {document.getElementById('TimeDisplay').innerHTML = "当前没有安排的日程";}
+        else {document.getElementById('TimeDisplay').innerHTML = "現在予定はありません";}
         }
 	}
 	
     /*************************日程提醒函数*************************/
-	function Schedulefunc()
-	{
+    function Schedulefunc()
+    {
         var audio = new Audio("./Alert Alarms/alert0.mp3"); // 这里的路径为mp3文件在项目中的绝对路径
 		// timer = setInterval(function(){
-            showMessage('你所预定的日程['+timercontext+']的提醒时间已经到了!',5000,true); //['+setTime+']
+            showMessage('予定['+timercontext+']の通知時間になりました！',5000,true); //['+setTime+']
             var notifyIconPath = "./assets/alarm.png";
             ipcRenderer.invoke('get-is-packaged').then((isPackaged) => {  //判断是否打包,若打包则使用打包后路径
                 if (isPackaged) {notifyIconPath=__dirname.replaceAll("\\", '/')+"../../app.asar.unpacked/assets/alarm.png"} 
                 notifier.notify(
                     {
-                        title: '日程[ '+timercontext+' ]提醒',
-                        message: '你所预定的日程[ '+timercontext+' ]的提醒时间已经到了! \n点击下方按钮以忽略或关闭提醒。', //['+setTime+']
+                        title: '予定[ '+timercontext+' ]の通知',
+                        message: '予定[ '+timercontext+' ]の通知時間になりました！\n下のボタンをクリックして無視または終了できます。', //['+setTime+']
                         icon: notifyIconPath,
                         actions: ['Dismiss','Cancel'],
                         wait: true ,
@@ -627,8 +627,8 @@ function loadTipsMessage(result) {
                     sessionStorage.setItem('ScheduleTime',null);
                     sessionStorage.setItem('ScheduleName',null);
                     sessionStorage.setItem('ScheduleDate',null);
-                    document.getElementById('TimeDisplay').innerHTML = "没有安排的日程";
-                    showMessage('你所预定的日程[ '+timercontext+' ]已经取消！',5000,true);
+                    document.getElementById('TimeDisplay').innerHTML = "予定はありません";
+                    showMessage('予定[ '+timercontext+' ]はキャンセルされました！',5000,true);
                 });
                 date = new Date();
                 sessionStorage.setItem('ScheduleDate',date);
@@ -678,14 +678,14 @@ function loadTipsMessage(result) {
             let targetDateday = targetDate.getDate().toString().padStart(2, '0');
             let targetDatehours = targetDate.getHours().toString().padStart(2, '0');
             let targetDateminutes = targetDate.getMinutes().toString().padStart(2, '0');
-            document.getElementById('TimeDisplay').innerHTML = "日程将在"+targetDatemonth+"月"+targetDateday+"日"+targetDatehours+":"+targetDateminutes+"提醒";
+            document.getElementById('TimeDisplay').innerHTML = "予定は"+targetDatemonth+"月"+targetDateday+"日"+targetDatehours+":"+targetDateminutes+"に通知されます";
             ipcRenderer.send('Schedule',[setTime,timercontext,date]);
             sessionStorage.setItem('ScheduleTime',setTime);
             sessionStorage.setItem('ScheduleName',timercontext);
             sessionStorage.setItem('ScheduleDate',date);
             // Schedulefunc();
 		}
-		else {document.getElementById('TimeDisplay').innerHTML = "请输入有效的时间！";}
+        else {document.getElementById('TimeDisplay').innerHTML = "有効な時間を入力してください！";}
 	});
     ipcRenderer.on('ScheduleAlarm', (event, message) => {
         timercontext=message;
