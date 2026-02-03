@@ -7,10 +7,12 @@
   "buildinf": "Stable Build 2024-08-01",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "pack": "electron-builder --dir",
     "pack-linux": "electron-builder --linux",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [
     "AI",
@@ -70,15 +72,28 @@
     }
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.11.1",
+    "@electron-forge/core": "^7.11.1",
+    "@electron-forge/maker-deb": "^7.11.1",
+    "@electron-forge/maker-msix": "^7.11.1",
+    "@electron-forge/maker-rpm": "^7.11.1",
+    "@electron-forge/maker-squirrel": "^7.11.1",
+    "@electron-forge/maker-zip": "^7.11.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.11.1",
+    "@electron-forge/plugin-fuses": "^7.11.1",
+    "@electron/fuses": "^1.8.0",
     "electron": "^22.3.25"
   },
   "dependencies": {
     "@electron/remote": "^2.1.0",
     "axios": "^1.6.2",
     "bingai-js": "^1.7.0",
+    "electron-squirrel-startup": "^1.0.1",
     "node-gyp": "^9.4.1",
     "node-notifier": "^10.0.1",
     "node-schedule": "^2.1.1",
+    "rpm": "^0.0.0",
+    "rpmbuild": "^0.0.23",
     "semver": "^6.3.1"
   }
 }
