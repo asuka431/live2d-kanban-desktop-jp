@@ -8,7 +8,7 @@ const internal = require('stream');
 let tray = null;/*托盘全局对象*/
 let settings = null;/*设置全局对象*/
 let settings_ontop =false;/*设置总在最上-全局flag*/
-let calcrater = 0; var PoinThrough = '点击穿透';
+let calcrater = 0; var PoinThrough = 'クリック透過';
 var packageGet = require("./package.json");
 const schedule = require('node-schedule'); //引入定时任务模块
 
@@ -105,7 +105,7 @@ function createWindow () {
       type: 'separator'
     }, //分隔线
     {
-      label: 'Kanban-Desktop 设置',
+      label: 'Kanban-Desktop 設定',
       click: function () {
         if(settings==null||settings.isDestroyed()){settingsShow ();}
         else {
@@ -147,14 +147,14 @@ function createWindow () {
       } //打开设置
     },
     {
-      label: '检查更新',
+      label: 'アップデートを確認',
       click: function () {shell.openExternal("http://studio.zerolite.cn")} //打开相应页面
     },
     {
-      label: '关于',
+      label: 'について',
       click: function () {
         dialog.showMessageBox({
-          title  : '关于', 
+          title  : 'について', 
           type  : 'info', 
           message : packageGet.name+" v"+packageGet.version+' Stable Powered By Electron™.'
         })
@@ -167,28 +167,28 @@ function createWindow () {
         label: PoinThrough,
         submenu: [
           {
-            label: '关闭点击穿透',
-            click: function () {win.setIgnoreMouseEvents(false);}, //设置点击穿透
+            label: 'クリック透過を無効',
+            click: function () {win.setIgnoreMouseEvents(false);}, //クリック透過の設定
             type: 'radio'
           },
           {
-            label: '启用点击穿透',
-            click: function () {win.setIgnoreMouseEvents(true);}, //设置点击穿透
+            label: 'クリック透過を有効',
+            click: function () {win.setIgnoreMouseEvents(true);}, //クリック透過の設定
             type: 'radio'
           },
         ],
     },
     {
-      label: '总在最上',
+      label: '常に最前面表示',
       submenu: [
         {
-          label: '开启总在最上',
-          click: function () {win.setAlwaysOnTop(true);settings_ontop=true;}, //设置总在最上
+          label: '常に最前面表示を有効',
+          click: function () {win.setAlwaysOnTop(true);settings_ontop=true;}, //常に最前面に設定
           type: 'radio'
         },
         {
-          label: '关闭总在最上',
-          click: function () {win.setAlwaysOnTop(false);settings_ontop=false;}, //取消设置总在最上
+          label: '常に最前面表示を無効',
+          click: function () {win.setAlwaysOnTop(false);settings_ontop=false;}, //常に最前面の設定を解除
           type: 'radio'
         },
       ],
@@ -197,18 +197,18 @@ function createWindow () {
     type: 'separator'
   }, //分隔线
     {
-        label: '退出',
+        label: '終了',
         click: function () {
           dialog.showMessageBox({
             type:"info",
-            buttons:["我手滑了","告辞！"],
-            title:"退出",
-            message:`真的要退出嘛？`
+            buttons:["手が滑った","おわり！"],
+            title:"終了確認",
+            message:`本当に終了しますか？`
           }).then((result)=>{
               if(result.response==1){
-                  console.log("确定");app.quit();
+                  console.log("決定");app.quit();
               }else if(result.response==0){
-                  console.log("取消")
+                  console.log("キャンセル")
               }
           }).catch((error)=>{
               console.log(error);
