@@ -55,9 +55,9 @@
 			<path d="M785.92 361.984H517.12V243.2c0-27.136-36.864-65.536-76.8-30.208-39.936 34.816-220.672 225.28-245.248 249.344-28.672 28.672-21.504 76.288 0 98.304 24.064 24.576 205.312 215.552 245.248 250.368 39.936 35.328 76.8-3.072 76.8-30.208v-118.784h268.8c33.792 0 61.44-27.648 61.44-61.44V423.424c0-33.792-27.136-61.44-61.44-61.44z" fill="#ffffff" p-id="7583" data-spm-anchor-id="a313x.7781069.0.i14" class="selected"></path>
 			</svg>
 			<div style="top:25px;text-align: center;position:absolute">
-				<div id="TimeDisplay" style="margin-bottom:15px;color: azure;font-size:14px ">当前没有日程</div>
-				<input type="text" id="contextset" name="text" placeholder=" 输入你的日程内容" class="timeset" style="text-align: center;" required><!--日程设定-->
-				<input type="text" id="timeset" name="text" placeholder=" 输入你想提示的时间" class="timeset" style="text-align: center;margin-top: 10px;" onclick="fp_timeset.open()" required><!--日程提醒-->
+				<div id="TimeDisplay" style="margin-bottom:15px;color: azure;font-size:14px ">現在スケジュールはありません</div>
+				<input type="text" id="contextset" name="text" placeholder=" スケジュール内容を入力" class="timeset" style="text-align: center;" required><!--日程设定-->
+				<input type="text" id="timeset" name="text" placeholder=" 通知時刻を入力" class="timeset" style="text-align: center;margin-top: 10px;" onclick="fp_timeset.open()" required><!--日程提醒-->
 				<div style="margin-top:12px;">
 					<button id="timesetButton" class="timesetButton"></button> 
 					<button id="timeresetButton" class="timeresetButton"></button>
@@ -72,7 +72,7 @@
 		<div class="NLPAsk" id="NLPx">
 			<div style="top:0px;background-image:url(./assets/box.jpg);color: #fff;text-align: center;">
 				<form id="AskBox" action="https://www.zerolite.cn/NLP.php" method="post" target="myiframe" name="formphp" align="left" class="AskBox" >
-					<input type="text" id="nlp" name="text" placeholder="输入你的话(。・∀・)ノ" style="border-radius:14px;background-image:url(./assets/box.jpg);border:0px;outline:none;font-size: 15px;margin-left: 5px;height: 27px;width: 160px;color: azure;" align="left" required>
+					<input type="text" id="nlp" name="text" placeholder="けんさく(。・∀・)ノ" style="border-radius:14px;background-image:url(./assets/box.jpg);border:0px;outline:none;font-size: 15px;margin-left: 5px;height: 27px;width: 160px;color: azure;" align="left" required>
 					<span class="fui-ask" onclick="NLPChange();" id="toolask"  style="text-align: right;border-radius: 12px;font-size: 15px; position: absolute;line-height: 29px;right: 12px;" ></span>
 					<input type="submit" id="nlpsubmit" name="submit" onkeypress= "none" onclick="document.getElementById('NLPask').style.display = 'block';Search_Engine();" >
 				</form>
@@ -131,7 +131,7 @@
 		const fp_timeset = flatpickr("#timeset", {
 			enableTime: true, // 启用时间选择
 			minDate: "today",
-			"locale": "zh",
+			"locale": "ja",
 			clickOpens: false, // 点击输入框不弹出
 			time_24hr: true, // 24小时制
 			dateFormat: "Y-m-dTH:i:00", // 设置日期时间格式
